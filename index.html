@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест: Гигиенические требования к организации работы с ПК</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #2c3e50; }
+    .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    h1 { font-size: 24px; text-align: center; margin-bottom: 8px; }
+    .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 25px; }
+    .grading-scale { background: #eef7fc; border-left: 4px solid #3498db; padding: 14px 18px; margin-bottom: 25px; border-radius: 4px; font-size: 14px; line-height: 1.6; }
+    .question { margin-bottom: 25px; padding-bottom: 18px; border-bottom: 1px solid #ecf0f1; }
+    .question-title { font-weight: 600; margin-bottom: 12px; font-size: 16px; line-height: 1.4; }
+    .options label { display: flex; align-items: center; margin-bottom: 8px; cursor: pointer; padding: 8px 12px; border-radius: 6px; transition: background 0.15s; }
+    .options label:hover { background: #f1f4f6; }
+    .options input { margin-right: 12px; transform: scale(1.15); }
+    button { display: block; width: 100%; padding: 14px; background: #27ae60; color: #fff; font-size: 18px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+    button:hover { background: #219653; }
+    button:active { transform: scale(0.99); }
+    #result { margin-top: 25px; padding: 20px; border-radius: 8px; display: none; text-align: center; }
+    .grade-5 { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .grade-4 { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    .grade-3 { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+    .grade-2 { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    .score-title { font-size: 26px; font-weight: bold; margin-bottom: 10px; }
+    .score-details { font-size: 16px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Тест: Гигиенические требования к работе с ПК</h1>
+    <div class="subtitle">15 вопросов для контроля знаний</div>
+    <div class="grading-scale">
+      <strong>Критерии оценивания:</strong><br>
+      • Менее 50% правильных ответов — «2»<br>
+      • 50% – 69% правильных ответов — «3» (удовлетворительно)<br>
+      • 70% – 89% правильных ответов — «4» (хорошо)<br>
+      • 90% и более правильных ответов — «5» (отлично)
+    </div>
+
+    <form id="quizForm">
+      <!-- Q1 -->
+      <div class="question">
+        <div class="question-title">1. На какую сторону горизонта предпочтительно ориентировать помещения для работы с ПК?</div>
+        <div class="options">
+          <label><input type="radio" name="q1" value="0"> На юг или юго-запад</label>
+          <label><input type="radio" name="q1" value="1"> На север или северо-восток</label>
+          <label><input type="radio" name="q1" value="0"> На восток или юго-восток</label>
+          <label><input type="radio" name="q1" value="0"> Ориентация значения не имеет</label>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question">
+        <div class="question-title">2. Допускается ли размещение рабочих мест с ПК в цокольных и подвальных помещениях?</div>
+        <div class="options">
+          <label><input type="radio" name="q2" value="0"> Допускается при наличии искусственной вентиляции</label>
+          <label><input type="radio" name="q2" value="0"> Допускается только для взрослых</label>
+          <label><input type="radio" name="q2" value="1"> Не допускается</label>
+          <label><input type="radio" name="q2" value="0"> Допускается без ограничений</label>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question">
+        <div class="question-title">3. Какова минимальная площадь на одно рабочее место при использовании жидкокристаллических (плазменных) мониторов?</div>
+        <div class="options">
+          <label><input type="radio" name="q3" value="0"> 6,0 м²</label>
+          <label><input type="radio" name="q3" value="1"> 4,5 м²</label>
+          <label><input type="radio" name="q3" value="0"> 3,5 м²</label>
+          <label><input type="radio" name="q3" value="0"> 5,0 м²</label>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question">
+        <div class="question-title">4. Как должен падать естественный свет по отношению к рабочему месту с ПК?</div>
+        <div class="options">
+          <label><input type="radio" name="q4" value="1"> Преимущественно слева</label>
+          <label><input type="radio" name="q4" value="0"> Преимущественно справа</label>
+          <label><input type="radio" name="q4" value="0"> Со спины пользователя</label>
+          <label><input type="radio" name="q4" value="0"> Прямо в лицо пользователю</label>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question">
+        <div class="question-title">5. Какую поверхность должен иметь корпус ПК, клавиатура и другие устройства во избежание бликов?</div>
+        <div class="options">
+          <label><input type="radio" name="q5" value="0"> Глянцевую и полированную</label>
+          <label><input type="radio" name="q5" value="1"> Матовую без блестящих деталей</label>
+          <label><input type="radio" name="q5" value="0"> Зеркальную</label>
+          <label><input type="radio" name="q5" value="0"> Металлическую хромированную</label>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="question">
+        <div class="question-title">6. Какова норма освещенности на поверхности рабочего стола с ПК?</div>
+        <div class="options">
+          <label><input type="radio" name="q6" value="0"> 150–200 лк</label>
+          <label><input type="radio" name="q6" value="1"> 300–500 лк</label>
+          <label><input type="radio" name="q6" value="0"> 600–800 лк</label>
+          <label><input type="radio" name="q6" value="0"> Не более 100 лк</label>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="question">
+        <div class="question-title">7. Какой тип люминесцентных ламп должен применяться при искусственном освещении?</div>
+        <div class="options">
+          <label><input type="radio" name="q7" value="1"> Лампы типа ЛБ (желтого свечения)</label>
+          <label><input type="radio" name="q7" value="0"> Лампы типа ЛД (голубого свечения)</label>
+          <label><input type="radio" name="q7" value="0"> Лампы типа ЛДЦ</label>
+          <label><input type="radio" name="q7" value="0"> Ультрафиолетовые лампы</label>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="question">
+        <div class="question-title">8. Разрешается ли использовать в одном помещении одновременно люминесцентные лампы и лампы накаливания?</div>
+        <div class="options">
+          <label><input type="radio" name="q8" value="0"> Разрешается всегда</label>
+          <label><input type="radio" name="q8" value="1"> Не следует использовать</label>
+          <label><input type="radio" name="q8" value="0"> Разрешается только в зимний период</label>
+          <label><input type="radio" name="q8" value="0"> Разрешается только для больших аудиторий</label>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="question">
+        <div class="question-title">9. Каково оптимальное расстояние от экрана монитора до глаз пользователя?</div>
+        <div class="options">
+          <label><input type="radio" name="q9" value="0"> 20–30 см</label>
+          <label><input type="radio" name="q9" value="0"> 35–45 см</label>
+          <label><input type="radio" name="q9" value="1"> 60–70 см (не менее 50 см)</label>
+          <label><input type="radio" name="q9" value="0"> Не менее 1,5 метров</label>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="question">
+        <div class="question-title">10. На какую часть экрана монитора должен приходиться уровень глаз пользователя?</div>
+        <div class="options">
+          <label><input type="radio" name="q10" value="0"> На нижний край экрана</label>
+          <label><input type="radio" name="q10" value="1"> На центр или 2/3 высоты экрана</label>
+          <label><input type="radio" name="q10" value="0"> На верхнюю рамку монитора</label>
+          <label><input type="radio" name="q10" value="0"> Выше монитора на 20 см</label>
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="question">
+        <div class="question-title">11. Каковы оптимальные параметры температуры воздуха в помещении с ПК?</div>
+        <div class="options">
+          <label><input type="radio" name="q11" value="0"> От +15 до +17 °С</label>
+          <label><input type="radio" name="q11" value="1"> От +19 до +21 °С</label>
+          <label><input type="radio" name="q11" value="0"> От +24 до +26 °С</label>
+          <label><input type="radio" name="q11" value="0"> Температура строго не нормируется</label>
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="question">
+        <div class="question-title">12. Какова общая максимальная продолжительность занятия с использованием ПК (включая физкультминутки и гимнастику для глаз)?</div>
+        <div class="options">
+          <label><input type="radio" name="q12" value="0"> Не более 20 минут</label>
+          <label><input type="radio" name="q12" value="1"> Не более 40 минут</label>
+          <label><input type="radio" name="q12" value="0"> Не более 60 минут</label>
+          <label><input type="radio" name="q12" value="0"> Не более 90 минут</label>
+        </div>
+      </div>
+
+      <!-- Q13 -->
+      <div class="question">
+        <div class="question-title">13. Какова рекомендуемая непрерывная длительность работы с экраном для детей 10–13 лет?</div>
+        <div class="options">
+          <label><input type="radio" name="q13" value="0"> 10 минут</label>
+          <label><input type="radio" name="q13" value="0"> 15 минут</label>
+          <label><input type="radio" name="q13" value="1"> 20 минут</label>
+          <label><input type="radio" name="q13" value="0"> 35 минут</label>
+        </div>
+      </div>
+
+      <!-- Q14 -->
+      <div class="question">
+        <div class="question-title">14. Через какой промежуток времени работы за ПК обязательно проводятся упражнения для глаз?</div>
+        <div class="options">
+          <label><input type="radio" name="q14" value="0"> Каждые 10 минут</label>
+          <label><input type="radio" name="q14" value="1"> Через каждые 20–25 минут</label>
+          <label><input type="radio" name="q14" value="0"> Только в конце рабочего дня</label>
+          <label><input type="radio" name="q14" value="0"> Через каждый час непрерывной работы</label>
+        </div>
+      </div>
+
+      <!-- Q15 -->
+      <div class="question">
+        <div class="question-title">15. Какова должна быть минимальная длительность перерывов после каждого занятия?</div>
+        <div class="options">
+          <label><input type="radio" name="q15" value="0"> Не менее 5 минут</label>
+          <label><input type="radio" name="q15" value="1"> Не менее 15 минут</label>
+          <label><input type="radio" name="q15" value="0"> Не менее 30 минут</label>
+          <label><input type="radio" name="q15" value="0"> Перерывы не обязательны</label>
+        </div>
+      </div>
+
+      <button type="button" onclick="calculateResult()">Завершить тест и узнать оценку</button>
+    </form>
+
+    <div id="result">
+      <div class="score-title" id="scoreTitle"></div>
+      <div class="score-details" id="scoreDetails"></div>
+    </div>
+  </div>
+
+  <script>
+    function calculateResult() {
+      const totalQuestions = 15;
+      let score = 0;
+      let answeredCount = 0;
+
+      for (let i = 1; i <= totalQuestions; i++) {
+        const options = document.getElementsByName('q' + i);
+        for (let opt of options) {
+          if (opt.checked) {
+            answeredCount++;
+            score += parseInt(opt.value, 10);
+            break;
+          }
+        }
+      }
+
+      if (answeredCount < totalQuestions) {
+        if (!confirm('Вы ответили не на все вопросы (' + answeredCount + ' из ' + totalQuestions + '). Завершить тест?')) {
+          return;
+        }
+      }
+
+      const percent = Math.round((score / totalQuestions) * 100);
+      let grade = '2';
+      let gradeClass = 'grade-2';
+
+      if (percent >= 90) {
+        grade = '5 (Отлично)';
+        gradeClass = 'grade-5';
+      } else if (percent >= 70) {
+        grade = '4 (Хорошо)';
+        gradeClass = 'grade-4';
+      } else if (percent >= 50) {
+        grade = '3 (Удовлетворительно)';
+        gradeClass = 'grade-3';
+      } else {
+        grade = '2 (Неудовлетворительно)';
+        gradeClass = 'grade-2';
+      }
+
+      const resultBox = document.getElementById('result');
+      resultBox.className = gradeClass;
+      resultBox.style.display = 'block';
+
+      document.getElementById('scoreTitle').innerText = 'Ваша оценка: ' + grade;
+      document.getElementById('scoreDetails').innerHTML = 
+        'Правильных ответов: <strong>' + score + ' из ' + totalQuestions + '</strong><br>' +
+        'Процент выполнения: <strong>' + percent + '%</strong>';
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

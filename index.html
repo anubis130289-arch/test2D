@@ -10,6 +10,9 @@
     h1 { font-size: 24px; text-align: center; margin-bottom: 8px; }
     .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 25px; }
     .grading-scale { background: #eef7fc; border-left: 4px solid #3498db; padding: 14px 18px; margin-bottom: 25px; border-radius: 4px; font-size: 14px; line-height: 1.6; }
+    .user-info { background: #fafafa; border: 1px solid #e1e8ed; padding: 18px; border-radius: 8px; margin-bottom: 25px; }
+    .user-info label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 15px; }
+    .user-info input { width: 100%; box-sizing: border-box; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #ccd0d5; border-radius: 6px; font-size: 15px; }
     .question { margin-bottom: 25px; padding-bottom: 18px; border-bottom: 1px solid #ecf0f1; }
     .question-title { font-weight: 600; margin-bottom: 12px; font-size: 16px; line-height: 1.4; }
     .options label { display: flex; align-items: center; margin-bottom: 8px; cursor: pointer; padding: 8px 12px; border-radius: 6px; transition: background 0.15s; }
@@ -17,7 +20,7 @@
     .options input { margin-right: 12px; transform: scale(1.15); }
     button { display: block; width: 100%; padding: 14px; background: #27ae60; color: #fff; font-size: 18px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s, transform 0.1s; }
     button:hover { background: #219653; }
-    button:active { transform: scale(0.99); }
+    button:disabled { background: #95a5a6; cursor: not-allowed; }
     #result { margin-top: 25px; padding: 20px; border-radius: 8px; display: none; text-align: center; }
     .grade-5 { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
     .grade-4 { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
@@ -25,12 +28,14 @@
     .grade-2 { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     .score-title { font-size: 26px; font-weight: bold; margin-bottom: 10px; }
     .score-details { font-size: 16px; line-height: 1.5; }
+    .status-msg { margin-top: 10px; font-size: 14px; color: #555; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Тест: Гигиенические требования к работе с ПК</h1>
     <div class="subtitle">15 вопросов для контроля знаний</div>
+
     <div class="grading-scale">
       <strong>Критерии оценивания:</strong><br>
       • Менее 50% правильных ответов — «2»<br>
@@ -39,14 +44,21 @@
       • 90% и более правильных ответов — «5» (отлично)
     </div>
 
+    <div class="user-info">
+      <label for="studentName">Фамилия и Имя учащегося: *</label>
+      <input type="text" id="studentName" placeholder="Например: Иванов Иван" required>
+
+      <label for="studentGroup">Класс / Группа: *</label>
+      <input type="text" id="studentGroup" placeholder="Например: 10-А или Группа 21" required>
+    </div>
+
     <form id="quizForm">
       <!-- Q1 -->
       <div class="question">
         <div class="question-title">1. На какую сторону горизонта предпочтительно ориентировать помещения для работы с ПК?</div>
         <div class="options">
           <label><input type="radio" name="q1" value="0"> На юг или юго-запад</label>
-          <label><input type="radio" name="q1" value="1"> На север или северо-восток</label>
-          <label><input type="radio" name="q1" value="0"> На восток или юго-восток</label>
+          <label><input type="radio" name="q1" value="1"> На север или северо-восток</label><label><input type="radio" name="q1" value="0"> На восток или юго-восток</label>
           <label><input type="radio" name="q1" value="0"> Ориентация значения не имеет</label>
         </div>
       </div>
@@ -121,8 +133,7 @@
       <div class="question">
         <div class="question-title">8. Разрешается ли использовать в одном помещении одновременно люминесцентные лампы и лампы накаливания?</div>
         <div class="options">
-          <label><input type="radio" name="q8" value="0"> Разрешается всегда</label>
-          <label><input type="radio" name="q8" value="1"> Не следует использовать</label>
+          <label><input type="radio" name="q8" value="0"> Разрешается всегда</label><label><input type="radio" name="q8" value="1"> Не следует использовать</label>
           <label><input type="radio" name="q8" value="0"> Разрешается только в зимний период</label>
           <label><input type="radio" name="q8" value="0"> Разрешается только для больших аудиторий</label>
         </div>
@@ -205,7 +216,8 @@
         </div>
       </div>
 
-      <button type="button" onclick="calculateResult()">Завершить тест и узнать оценку</button>
+      <button type="button" id="submitBtn" onclick="submitTest()">Завершить тест и отправить результат</button>
+      <div id="statusMsg" class="status-msg" style="text-align: center;"></div>
     </form>
 
     <div id="result">
@@ -215,7 +227,20 @@
   </div>
 
   <script>
-    function calculateResult() {
+    // НАСТРОЙКИ TELEGRAM (Замените на свои)
+    const TELEGRAM_BOT_TOKEN = "8923906983:AAEp0mQMpCpejIT751FD1toN3hXllS0jOfg";
+    const TELEGRAM_CHAT_ID = "8923906983";
+
+    async function submitTest() {
+      const studentName = document.getElementById('studentName').value.trim();
+      const studentGroup = document.getElementById('studentGroup').value.trim();
+
+      if (!studentName || !studentGroup) {
+        alert("Пожалуйста, заполните ваши ФИО и группу/класс перед завершением теста!");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
       const totalQuestions = 15;
       let score = 0;
       let answeredCount = 0;
@@ -255,12 +280,44 @@
         gradeClass = 'grade-2';
       }
 
+      // Отключение кнопки во избежание повторной отправки
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Отправка результата...";
+
+      // Формирование сообщения для Telegram
+      const messageText =
+        `📋 *Результат теста: ПК и гигиена*\n\n` +
+        `👤  *Учащийся:* ${studentName}\n` +
+        `🏫  *Группа/Класс:* ${studentGroup}\n` +
+        `🎯  *Оценка:* ${grade}\n` +
+        `📊  *Баллы:* ${score} из ${totalQuestions} (${percent}%)\n` +
+        `🕒 *Дата:* ${new Date().toLocaleString('ru-RU')}`;
+
+      try {
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: messageText,
+            parse_mode: 'Markdown'
+          })
+        });
+        document.getElementById('statusMsg').innerText = "✅ Результат успешно передан преподавателю!";
+      } catch (err) {
+        console.error("Ошибка отправки в Telegram:", err);
+        document.getElementById('statusMsg').innerText = "⚠️  Не удалось связаться с сервером отправки, но оценка подсчитана.";
+      }
+
+      // Отображение оценки ученику
       const resultBox = document.getElementById('result');
       resultBox.className = gradeClass;
       resultBox.style.display = 'block';
 
       document.getElementById('scoreTitle').innerText = 'Ваша оценка: ' + grade;
-      document.getElementById('scoreDetails').innerHTML = 
+      document.getElementById('scoreDetails').innerHTML =
+        'Учащийся: <strong>' + studentName + ' (' + studentGroup + ')</strong><br>' +
         'Правильных ответов: <strong>' + score + ' из ' + totalQuestions + '</strong><br>' +
         'Процент выполнения: <strong>' + percent + '%</strong>';
 
@@ -269,3 +326,9 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
